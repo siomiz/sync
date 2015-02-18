@@ -12,14 +12,14 @@ RUN wget -qO- http://download.getsyncapp.com/endpoint/btsync/os/linux-x64/track/
 RUN DEBIAN_FRONTEND=noninteractive apt-get purge -y wget \
 	&& DEBIAN_FRONTEND=noninteractive apt-get clean
 
-VOLUME ["/storage", "/opt/btsync/.sync"]
+VOLUME ["/media/storage", "/opt/btsync/.sync"]
 
 RUN ./btsync --dump-sample-config > sync.conf \
 	&& sed -ri '/"device_name"/s/"My Sync Device"/"'"${HOSTNAME}"'"/;' sync.conf \
 	&& sed -ri '/"use_upnp"/s/true/false/;' sync.conf \
 	&& sed -ri '/"listening_port"/s/0,/18888,/;' sync.conf \
 	&& sed -ri '/"directory_root"/s/\/\///;' sync.conf \
-	&& sed -ri '/"directory_root"/s#: ?"(.*)"#: "/storage"#;' sync.conf
+	&& sed -ri '/"directory_root"/s#: ?"(.*)"#: "/media/storage"#;' sync.conf
 
 EXPOSE 8888 18888
 
