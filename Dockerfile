@@ -7,7 +7,7 @@ RUN apt-get update \
 
 WORKDIR /opt/btsync
 
-RUN wget -qO- http://usyncapp.com/2.0.51_W4TNQ/btsync_x64-2.0.51.tar.gz | tar zxv
+RUN wget -qO- https://download-cdn.getsyncapp.com/stable/linux-x64/BitTorrent-Sync_x64.tar.gz | tar zxv
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get purge -y wget \
 	&& DEBIAN_FRONTEND=noninteractive apt-get clean
